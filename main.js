@@ -26,19 +26,74 @@ ActionBtn.addEventListener("click",function clickHandler(){
 
     HeadingTotal.textContent = `Total Expense :${TotalExpense}`;
 
-   const allExpenseHtml = allexpense.map(item=>{
 
-        return `<ul>
-                <li>${item.desc} <span>${item.amount}</span></li>
+    renderHtml(allexpense);
 
-        </ul>`
+  })
 
-   })
+function getdatestring(todaydate){
+    return todaydate.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+}
 
-   const joinhtml = allExpenseHtml.join("");
+function renderHtml(ArrofList) {
 
-                           
-    ExpenseTable.innerHTML = joinhtml;
-})
+    const allExpenseHtml = ArrofList.map(item=>{ 
+
+        return createExpList(item)
+     
+    })
+ 
+    const joinhtml = allExpenseHtml.join("");
+ 
+                            
+     ExpenseTable.innerHTML = joinhtml;
+ 
 
 
+}
+
+
+
+function createExpList({desc,amount,todaydate}) {
+
+    return `<li class='list-group-item d-flex justify-content-between'>
+        
+    <div class="d-flex flex-column"> ${desc}
+
+    <small class="text-muted">${getdatestring(todaydate)}</small>
+    </div>
+    <div>
+ 
+    <span class="px-1">${amount}</span>
+    <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteItem(${todaydate.valueOf()})" >
+    <i class="fas fa-trash-alt"></i>
+</button>
+    </div>
+    </li>
+`
+
+}
+
+
+function deleteItem(datevalue){
+
+console.log("delete button clicked",datevalue);
+
+newArr = [];
+    
+for(let i = 0; i<allexpense.length;i++)
+
+{
+
+        console.log(allexpense[i].todaydate.valueOf());
+
+    if(allexpense[i].todaydate.valueOf()!==datevalue)
+    {
+        newArr.push(allexpense[i]);
+    }
+
+
+}
+
+
+}
