@@ -77,23 +77,41 @@ function createExpList({desc,amount,todaydate}) {
 
 function deleteItem(datevalue){
 
-console.log("delete button clicked",datevalue);
 
-newArr = [];
+
+///newArr = [];
     
-for(let i = 0; i<allexpense.length;i++)
+//for(let i = 0; i<allexpense.length;i++)
 
-{
+//{
 
-        console.log(allexpense[i].todaydate.valueOf());
+       // console.log(allexpense[i].todaydate.valueOf());
 
-    if(allexpense[i].todaydate.valueOf()!==datevalue)
-    {
-        newArr.push(allexpense[i]);
+  // if(allexpense[i].todaydate.valueOf()!==datevalue)
+   // {
+   //     newArr.push(allexpense[i]);
+       
+  //  }
+ //   if(allexpense[i].todaydate.valueOf()===datevalue){
+   //     const deleteexp = allexpense[i].amount;
+  //      TotalExpense = TotalExpense - deleteexp ;
+   //     HeadingTotal.textContent = `Total Expense :${TotalExpense}`;
+//    }
+
+//}
+
+const newArr = allexpense.filter(item=>{
+
+    if(item.todaydate.valueOf() !== datevalue) {
+
+        return item;
     }
 
 
-}
+})
 
 
+
+allexpense = newArr;
+renderHtml(newArr);
 }
